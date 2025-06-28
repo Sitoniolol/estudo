@@ -2,15 +2,39 @@ const express = require("express")
 
 const app = express()
 
-app.get('/usuarios/:APARECE', function (request, response) {
+app.use(express.json())
 
-    console.log(request.params)
+const user = [{
+    name: "Sitonio",
+    age: 24,
+},]
 
-    response.send('Ola deu bom')
+app.get('/usuarios', function (request, response) {
+
+
+    response.json(user)
+})
+
+app.post('/usuarios', function (request, response) {
+
+    console.log(request.body)
+
+    const newUser = request.body
+
+    user.push(request.body)
+
+
+    response.status(201).json(newUser)
 })
 
 
+app.delete('/usuarios/:id', function (request, response) {
+    console.log(request)
+
+    response.json(users)
+})
+
 
 app.listen(3000, () => {
-    console.log("Meu servidor ta okgugu")
+    console.log("Meu servidor ta ok")
 })
